@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# In case you're wondering. Yes, this build script is doing unholy things...
+
 set -e
 
 # nix shell nixpkgs#esbuild
