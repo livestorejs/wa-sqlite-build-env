@@ -30,4 +30,9 @@ sed -i '' "s|const W = new Worker(options.proxyUri);|const W = globalThis.makePr
 
 sed -i '' "s|wasmBinaryFile = 'sqlite3.wasm';|wasmBinaryFile = globalThis.wasmBinaryFile;|g" dist/sqlite3.js
 
-sed -i '' "s|return filename.startsWith(dataURIPrefix);|return true;|g" dist/sqlite3.js
+# sqlite3.wasm file path is already fully resolved via Vite
+sed -i '' "s|wasmBinaryFile = locateFile(wasmBinaryFile)|// wasmBinaryFile = locateFile(wasmBinaryFile)|g" dist/sqlite3.js
+
+# prevent warn log message (even during dev)
+sed -i '' "s|console.warn(\"Installing sqlite3|// console.warn(\"Installing sqlite3|g" dist/sqlite3.js
+
