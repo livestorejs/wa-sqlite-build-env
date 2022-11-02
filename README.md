@@ -33,6 +33,6 @@ sqlite3InitModule().then((sqlite3) => {
 ```
 
 ```sh
-# TODO report & fix bug in Vite (currently 404 for those files)
+# This is needed until Vite fixes https://github.com/vitejs/vite/issues/10761
 cp node_modules/sqlite-wasm-esm/dist/sqlite3{.wasm,-opfs-async-proxy.js} node_modules/.vite/deps/
 ```

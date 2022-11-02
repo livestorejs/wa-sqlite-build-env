@@ -59,7 +59,9 @@ export type ExecOptions = {
 
   returnValue?: 'this' | 'resultRows' | 'saveSql'
 
-  rowMode: 'array' | 'object' | 'stmt'
+  rowMode?: 'array' | 'object' | 'stmt'
+
+  resultRows?: TODO[]
 }
 
 export type FlexibleString = string | Uint8Array | Int8Array | string[]
