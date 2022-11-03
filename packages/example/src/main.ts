@@ -4,7 +4,6 @@ const sqlite = await sqliteWasm();
 
 const db = new sqlite.oo1.DB(":memory:");
 
-// @ts-ignore
 db.exec([
   "CREATE TABLE foo (a primary key, b);",
   "INSERT INTO foo VALUES (1, 2);",
