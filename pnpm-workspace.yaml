@@ -1,3 +1,4 @@
 packages:
-  - 'packages/sqlite'
-  - 'packages/example'
+  - "packages/sqlite"
+  - "packages/crsqlite"
+  - "packages/example"
