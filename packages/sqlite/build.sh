@@ -36,3 +36,4 @@ sed -i '' "s|wasmBinaryFile = locateFile(wasmBinaryFile)|// wasmBinaryFile = loc
 # prevent warn log message (even during dev)
 sed -i '' "s|console.warn(\"Installing sqlite3|// console.warn(\"Installing sqlite3|g" dist/sqlite3.js
 
+sed -i '' "s|Module['locateFile'] = function(path, prefix) {|Module['locateFile'] = function(path, prefix) { return globalThis.wasmBinaryFile;" dist/sqlite3.js
