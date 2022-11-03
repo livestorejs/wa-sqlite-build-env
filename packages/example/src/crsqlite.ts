@@ -30,6 +30,11 @@ db.exec({
 });
 console.log(rows[0]);
 
+// you _MUST_ run this before closing `crsql` db connections
+// see -- https://sqlite.org/forum/forumpost/a38be46f01
+db.exec("SELECT crsql_finalize()");
+db.close();
+
 // Spawning into a worker
 console.log("Try running the db in a worker");
 new Worker(new URL("./crsqlite-worker.ts", import.meta.url), {
