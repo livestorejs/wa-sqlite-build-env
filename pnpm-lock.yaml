@@ -22,10 +22,12 @@ importers:
     specifiers:
       crsqlite-wasm-esm: workspace:*
       sqlite-wasm-esm: workspace:*
+      uuid-tool: ^2.0.3
       vite: ^3.2.2
     dependencies:
       crsqlite-wasm-esm: link:../crsqlite
       sqlite-wasm-esm: link:../sqlite
+      uuid-tool: 2.0.3
     devDependencies:
       vite: 3.2.2
 
@@ -1880,6 +1882,10 @@ packages:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
     dev: true
+
+  /uuid-tool/2.0.3:
+    resolution: {integrity: sha512-En9cTJm+bLgjjfoIVEW91f0Irr0HZ9mqzK0BwntzZzOg82bOUEIzIw8pNwvC+dhVnnJ8x+fQV8TQ+q6te1ximA==}
+    dev: false
 
   /validate-npm-package-license/3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
