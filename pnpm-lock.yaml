@@ -21,7 +21,10 @@ importers:
       vite: 3.2.2
 
   packages/sqlite:
-    specifiers: {}
+    specifiers:
+      esbuild: ^0.15.12
+    dependencies:
+      esbuild: 0.15.12
 
 packages:
 
