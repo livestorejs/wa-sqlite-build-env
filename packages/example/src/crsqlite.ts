@@ -29,3 +29,7 @@ db.exec({
   rowMode: "object",
 });
 console.log(rows[0]);
+
+// Spawning into a worker
+console.log("Try running the db in a worker");
+new Worker(new URL("./sqlite-worker.ts", import.meta.url), { type: "module" });

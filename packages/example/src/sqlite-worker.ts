@@ -1,4 +1,4 @@
-import sqlite3InitModule from "sqlite-wasm-esm";
+import sqlite3InitModule from "crsqlite-wasm-esm";
 
 sqlite3InitModule().then((sqlite3) => {
   // const db = new sqlite3.opfs!.OpfsDb("my-db", "c");
