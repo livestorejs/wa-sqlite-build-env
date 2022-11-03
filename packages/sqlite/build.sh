@@ -13,7 +13,7 @@ cp src/sqlite3.d.ts dist
 cp lib/sqlite3.wasm dist
 
 cp lib/sqlite3.js lib/sqlite3.js.txt
-esbuild src/sqlite3-wrapper.js --outfile=dist/sqlite3.js --format=esm --target=es2020 --bundle
+pnpm esbuild src/sqlite3-wrapper.js --outfile=dist/sqlite3.js --format=esm --target=es2020 --bundle
 rm lib/sqlite3.js.txt
 
 cp lib/sqlite3-opfs-async-proxy.js dist

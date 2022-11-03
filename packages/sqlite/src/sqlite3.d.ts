@@ -35,7 +35,7 @@ export class DB {
   changes(total: boolean, sixtyFour: boolean): number
 
   exec(options: ExecOptions): TODO
-  exec(query: FlexibleString, options: ExecOptions): TODO
+  exec(query: FlexibleString, options?: ExecOptions): TODO
   close(): DB
   export(): TODO
   /**
