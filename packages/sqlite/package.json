@@ -1,0 +1,11 @@
+{
+  "name": "sqlite-wasm-esm",
+  "type": "module",
+  "version": "0.0.21",
+  "files": [
+    "dist"
+  ],
+  "module": "dist/sqlite3.js",
+  "types": "dist/sqlite3.d.ts",
+  "sideEffects": false
+}

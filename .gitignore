@@ -1,1 +1,6 @@
 dist
+node_modules/
+.DS_Store
+.turbo/
+.pnpm-debug.log
+tsconfig.tsbuildinfo
