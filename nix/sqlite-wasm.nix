@@ -35,6 +35,8 @@ stdenv.mkDerivation rec {
     export DESTDIR="$PWD"
 
     make -C ext/wasm dist
+
+    # TODO switch to `esm` target once fixed: https://sqlite.org/forum/forumpost/af308d69455db6b9eab2ceb9301ddbe085c8e549c6cdbe2dae6420a15e212386
     # make -C ext/wasm esm
 
     cp -r . $out
