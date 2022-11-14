@@ -1,14 +1,24 @@
 {
   "name": "sqlite-wasm-esm",
   "type": "module",
-  "version": "0.0.21",
+  "version": "0.0.23",
   "files": [
     "dist"
   ],
-  "module": "dist/sqlite3-wrapper.js",
+  "exports": {
+    ".": {
+      "import": "./dist/sqlite3-wrapper.js"
+    },
+    "./sqlite3.js": {
+      "import": "./dist/sqlite3.js"
+    },
+    "./sqlite3.wasm": {
+      "import": "./dist/sqlite3.wasm"
+    },
+    "./sqlite3-opfs-async-proxy": {
+      "import": "./dist/sqlite3-opfs-async-proxy.js"
+    }
+  },
   "types": "dist/sqlite3.d.ts",
-  "sideEffects": false,
-  "dependencies": {
-    "esbuild": "^0.15.12"
-  }
+  "sideEffects": false
 }

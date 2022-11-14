@@ -4,3 +4,4 @@ node_modules/
 .turbo/
 .pnpm-debug.log
 tsconfig.tsbuildinfo
+.direnv
