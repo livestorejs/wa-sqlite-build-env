@@ -26,7 +26,8 @@
           shellHook = ''
             echo ${self.packages.${system}.sqlite-wasm}
             echo ${self.packages.${system}.sqlite-wasm-esm}
-            cp -rf ${self.packages.${system}.sqlite-wasm-esm} packages/sqlite/dist
+            mkdir packages/sqlite/dist
+            cp -rf ${self.packages.${system}.sqlite-wasm-esm}/* packages/sqlite/dist
             chmod +w packages/sqlite/dist
           '';
 
