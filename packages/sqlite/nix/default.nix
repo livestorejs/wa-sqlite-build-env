@@ -6,7 +6,8 @@ stdenv.mkDerivation rec {
 
   src = ./..;
 
-  builder = ./builder.sh;
+  builder = ./builder-vite-workaround.sh;
+  # builder = ./builder.sh;
 
   nativeBuildInputs = [
     pkgs.gnused # use version with support for `sed -i`
