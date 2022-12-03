@@ -12,13 +12,13 @@ yarn add sqlite-wasm-esm
 
 ```js
 // your-worker.js
-import sqlite3InitModule from 'sqlite-wasm-esm'
+import sqlite3InitModule from "sqlite-wasm-esm";
 
 sqlite3InitModule().then((sqlite3) => {
-  const opfsDb = new sqlite3.opfs.OpfsDb('my-db', 'c')
+  const opfsDb = new sqlite3.opfs.OpfsDb("my-db", "c");
   // or in-memory ...
-  const db = new sqlite3.DB()
-})
+  const db = new sqlite3.DB();
+});
 ```
 
 ### Vite config
@@ -26,13 +26,10 @@ sqlite3InitModule().then((sqlite3) => {
 ```js
 {
 	// ...
-	// requires the following options
-	build: { target: ['es2020'], },
-	optimizeDeps: { esbuildOptions: { target: 'es2020' } },
+	build: { target: ['es2020'], }, // Needed in `sqlite-wasm-esm` for big-ints to work
+	optimizeDeps: {
+		exclude: ['sqlite-wasm-esm'], // TODO remove once fixed https://github.com/vitejs/vite/issues/8427
+    esbuildOptions: { target: 'es2020' }, // Needed in `sqlite-wasm-esm` for big-ints to work
+	},
 }
-```
-
-```sh
-# This is needed until Vite fixes https://github.com/vitejs/vite/issues/10761
-cp node_modules/sqlite-wasm-esm/dist/sqlite3{.wasm,-opfs-async-proxy.js} node_modules/.vite/deps/
 ```
