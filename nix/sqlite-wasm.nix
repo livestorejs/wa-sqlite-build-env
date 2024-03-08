@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, pkgs }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "sqlite-wasm";
-  version = "3.40.0";
+  version = "3.46.0";
 
   src = fetchFromGitHub {
     owner = "sqlite";
     repo = "sqlite";
-    rev = "8d7b41302f13ce815a6f1535ef8cc8f8fd5a1c8e";
-    sha256 = "sha256-2gvucSHyaqP0EHEkvpUmvkxlWx76FKBXIVdODSXWZR4=";
+    rev = "5fb718aaab631e6a7f750e5049aa6f1eb33fb4a8";
+    sha256 = "sha256-ySHTmoONjoN965Q3OrYQRC6MiuCMDRvHnyRcjV6fa4Y=";
     # sha256 = lib.fakeSha256;
   };
 
@@ -28,6 +28,13 @@ stdenv.mkDerivation rec {
     export EM_CACHE=$TMPDIR/emscripten_cache_sqlite
 
     ./configure
+    # ./configure --enable-all
+
+    # Add SQLite flags to `ext/wasm/api/sqlite3-wasm.c` (bytecode, session (incl. preupdate))
+    # i.e. add `#define SQLITE_ENABLE_BYTECODE_VTAB`, ... to beginning of file
+    sed -i '1s/^/#define SQLITE_ENABLE_BYTECODE_VTAB\n/' ext/wasm/api/sqlite3-wasm.c
+    sed -i '1s/^/#define SQLITE_ENABLE_SESSION\n/' ext/wasm/api/sqlite3-wasm.c
+    sed -i '1s/^/#define SQLITE_ENABLE_PREUPDATE_HOOK\n/' ext/wasm/api/sqlite3-wasm.c
   '';
 
   buildPhase = ''

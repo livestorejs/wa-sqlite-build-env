@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -23,13 +23,16 @@
             self.packages.${system}.althttpd # need newer version with `--enable-sab` flag
           ];
 
+          # Can also be run explicitly via `nix develop --print-build-logs` to see full logs
           shellHook = ''
             echo ${self.packages.${system}.sqlite-wasm}
-            echo ${self.packages.${system}.sqlite-wasm-esm}
-            mkdir packages/sqlite/dist
-            cp -rf ${self.packages.${system}.sqlite-wasm-esm}/* packages/sqlite/dist
-            chmod +w packages/sqlite/dist
+            cp -rf ${self.packages.${system}.sqlite-wasm}/ext/wasm/jswasm sqlite-wasm
           '';
+
+            # echo ${self.packages.${system}.sqlite-wasm-esm}
+            # mkdir packages/sqlite/dist
+            # cp -rf ${self.packages.${system}.sqlite-wasm-esm}/* packages/sqlite/dist
+            # chmod +w packages/sqlite/dist
 
         };
 
