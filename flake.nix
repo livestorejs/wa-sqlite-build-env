@@ -26,7 +26,9 @@
           # Can also be run explicitly via `nix develop --print-build-logs` to see full logs
           shellHook = ''
             echo ${self.packages.${system}.sqlite-wasm}
+            rm -rf sqlite-wasm
             cp -rf ${self.packages.${system}.sqlite-wasm}/ext/wasm/jswasm sqlite-wasm
+            chmod -R u+w sqlite-wasm
           '';
 
             # echo ${self.packages.${system}.sqlite-wasm-esm}
