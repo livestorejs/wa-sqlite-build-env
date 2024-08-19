@@ -6,4 +6,4 @@ node_modules/
 tsconfig.tsbuildinfo
 .direnv
 
-/sqlite-wasm
+/wa-sqlite-livestore
