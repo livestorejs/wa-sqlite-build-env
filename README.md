@@ -1,3 +1,3 @@
-# sqlite-wasm-esm
+# wa-sqlite-livestore
 
-Build environment for [livestorejs/wa-sqlite](https://github.com/livestorejs/wa-sqlite)
+Build environment for [livestorejs/wa-sqlite](https://github.com/livestorejs/wa-sqlite). 
