@@ -1,3 +1,3 @@
 [submodule "wa-sqlite"]
 	path = wa-sqlite
-	url = git@github.com:rhashimoto/wa-sqlite.git
+	url = git@github.com:livestore/wa-sqlite.git
