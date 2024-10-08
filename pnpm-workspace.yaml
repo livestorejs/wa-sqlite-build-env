@@ -1,4 +1,3 @@
 packages:
-  - "packages/sqlite"
-  - "packages/crsqlite"
-  - "packages/example"
+  - "test"
+  - "wa-sqlite"

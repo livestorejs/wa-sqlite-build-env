@@ -1,0 +1,7 @@
+{
+	"name": "test-scripts",
+	"private": true,
+	"dependencies": {
+		"@livestore/wa-sqlite": "workspace:*"
+	}
+}

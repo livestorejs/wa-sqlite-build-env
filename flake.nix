@@ -28,20 +28,16 @@
 
             nodejs_22
             corepack
+            bun
           ];
 
           # Can also be run explicitly via `nix develop --print-build-logs` to see full logs
           shellHook = ''
-            echo ${self.packages.${system}.wa-sqlite-livestore}
             rm -rf wa-sqlite/dist
+            echo ${self.packages.${system}.wa-sqlite-livestore}
             cp -rf ${self.packages.${system}.wa-sqlite-livestore}/dist wa-sqlite/dist
             chmod -R u+w wa-sqlite/dist
           '';
-
-            # echo ${self.packages.${system}.wa-sqlite-livestore-esm}
-            # mkdir packages/sqlite/dist
-            # cp -rf ${self.packages.${system}.wa-sqlite-livestore-esm}/* packages/sqlite/dist
-            # chmod +w packages/sqlite/dist
 
         };
 
