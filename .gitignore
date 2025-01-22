@@ -7,3 +7,5 @@ tsconfig.tsbuildinfo
 .direnv
 
 /wa-sqlite-livestore
+
+tmp

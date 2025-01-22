@@ -19,6 +19,9 @@ const main = async () => {
 
 	const syncDb = makeSynchronousDatabase(sqlite3, db)
 
+	const db2 = sqlite3.open_v2Sync(':memory:', undefined, 'memory-vfs')
+	const syncDb2 = makeSynchronousDatabase(sqlite3, db2)
+
 	syncDb.execute('CREATE TABLE todo (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, group_id INTEGER, counter INTEGER)')
 
 	syncDb.execute('INSERT INTO todo (title, group_id, counter) VALUES (?, ?, ?)', ['initial todo', 1, 0])
@@ -44,12 +47,18 @@ const main = async () => {
 	}
 
 	const rewindSession = (groupId: GroupId) => {
+		console.log('rewinding session', groupId)
 		const session = sessions[groupId]
 
 		sqlite3.session_enable(session, true)
-		// const changeset = sqlite3.session_changeset(session)
-		// const invertedChangeset = sqlite3.changeset_invert(changeset.changeset)
-		const invertedChangeset = sqlite3.session_changeset_inverted(session)
+		const changeset = sqlite3.session_changeset(session)
+		// This works but I want to try the other path via `changeset_invert`
+		// const invertedChangeset = sqlite3.session_changeset_inverted(session)
+
+
+		// const restoredChangesetIter = sqlite3.changeset_start(changeset.changeset)
+		// sqlite3.changeset_finalize(restoredChangesetIter)
+		const invertedChangeset = { changeset: sqlite3.changeset_invert(new Uint8Array(changeset.changeset.slice())) }
 
 		sqlite3.changeset_apply(db, invertedChangeset.changeset)
 	}
