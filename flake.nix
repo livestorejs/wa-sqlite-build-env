@@ -1,13 +1,17 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
+    nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, nixpkgsUnstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        # pkgsUnstable is currently needed to get a recent emscripten version (2025-02-20-14:45)
+        # TODO remove this once emscripten 3.1.73 is available in nixpkgs
+        pkgsUnstable = import nixpkgsUnstable { inherit system; };
         corepack = pkgs.runCommand "corepack-enable" {} ''
           mkdir -p $out/bin
           ${pkgs.nodejs_22}/bin/corepack enable --install-directory $out/bin
@@ -15,7 +19,7 @@
       in
       {
         packages = {
-          wa-sqlite-livestore = pkgs.callPackage ./nix/wa-sqlite-livestore.nix { };
+          wa-sqlite-livestore = pkgs.callPackage ./nix/wa-sqlite-livestore.nix { inherit pkgsUnstable; };
           # wa-sqlite-livestore-esm = pkgs.callPackage ./packages/sqlite/nix/default.nix {
           #   wa-sqlite-livestore = self.packages.${system}.wa-sqlite-livestore;
           # };

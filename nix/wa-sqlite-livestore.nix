@@ -1,11 +1,11 @@
-{ lib, stdenv, fetchFromGitHub, fetchurl, pkgs }:
+{ lib, stdenv, fetchFromGitHub, fetchurl, pkgs, pkgsUnstable }:
 let 
   extension-functions = ./extension-functions.c;
   localWaSqlite = ../wa-sqlite;  # Adjust this path as needed
 in
 stdenv.mkDerivation rec {
   pname = "wa-sqlite-livestore";
-  version = "3.46.0";
+  version = "3.47.0";
   # version = "3.46.1";
 
   srcs = [
@@ -13,8 +13,8 @@ stdenv.mkDerivation rec {
     (fetchFromGitHub {
       owner = "sqlite";
       repo = "sqlite";
-      rev = "5fb718aaab631e6a7f750e5049aa6f1eb33fb4a8";
-      sha256 = "sha256-ySHTmoONjoN965Q3OrYQRC6MiuCMDRvHnyRcjV6fa4Y=";
+      rev = "f5fb820c0f4781337faf02ed871be68d13a83d94";
+      sha256 = "sha256-35xrRPgoj92rji9EAyCHvhMP/NEz9hffOMJyhSKCCZ8=";
       # version = "3.46.1";
       # rev = "f3d536d37825302e31ed0eddd811c689f38f85a3";
       # sha256 = "sha256-dJd03TOsNkOeW3f8vC5hXiIx+/w74vXcnq6HkRL7A24=";
@@ -52,7 +52,7 @@ stdenv.mkDerivation rec {
     pkgs.tcl
     pkgs.gcc
     pkgs.wabt
-    pkgs.emscripten
+    pkgsUnstable.emscripten
     pkgs.unzip
     pkgs.openssl
     pkgs.zip
@@ -67,6 +67,10 @@ stdenv.mkDerivation rec {
   # '';
 
   configurePhase = ''
+    echo "Emscripten version:"
+    emcc --version
+
+
     pwd
     ls -la
 
@@ -95,6 +99,9 @@ stdenv.mkDerivation rec {
     export DESTDIR="$PWD"
     export HOME="$PWD"
 
+    mkdir -p cache/emscripten
+    export EM_CACHE="$PWD/cache/emscripten"
+
     # Ensure dist directory exists and has correct permissions
     mkdir -p dist
     chmod 755 dist
@@ -112,6 +119,22 @@ stdenv.mkDerivation rec {
     mkdir -p dist/fts5
     mv dist-fts5/wa-sqlite* dist/fts5
     rm -rf dist-fts5
+
+    # Adjust `mayCreate` code in all .mjs dist files
+    for file in dist/*.mjs dist/fts5/*.mjs; do
+      sed -i '
+        /mayCreate(dir, name) {/,/FS.lookupNode(dir, name);/ c\
+  mayCreate(dir, name) {\
+      var node\
+      try {\
+        node = FS.lookupNode(dir, name);
+        ' "$file"
+    done
+
+    # Adjust `mayCreate` in minified dist files
+    for file in dist/*.mjs dist/fts5/*.mjs; do
+      sed -i 's/mayCreate(dir,name){try{var node=FS.lookupNode(dir,name)/mayCreate(dir,name){var node;try{node=FS.lookupNode(dir,name)/g' "$file"
+    done
 
   '';
 
