@@ -1,0 +1,21 @@
+{
+  "name": "web-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "playwright": "^1.53.1",
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "@schickling/sqldiff-wasm": "link:../sqldiff-wasm-package",
+    "@livestore/wa-sqlite": "link:../wa-sqlite"
+  }
+}
