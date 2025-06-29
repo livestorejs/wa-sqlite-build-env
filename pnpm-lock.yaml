@@ -60,9 +60,6 @@ importers:
       '@schickling/sqldiff-wasm':
         specifier: link:../sqldiff-wasm-package
         version: link:../sqldiff-wasm-package
-      wa-sqlite:
-        specifier: link:../wa-sqlite
-        version: link:../wa-sqlite
     devDependencies:
       '@playwright/test':
         specifier: ^1.53.1
