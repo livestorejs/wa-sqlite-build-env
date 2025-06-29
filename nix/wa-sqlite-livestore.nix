@@ -1,7 +1,6 @@
-{ lib, stdenv, fetchFromGitHub, fetchurl, pkgs, pkgsUnstable }:
+{ lib, stdenv, fetchFromGitHub, fetchurl, pkgs, pkgsUnstable, waSQLiteSrc }:
 let 
   extension-functions = ./extension-functions.c;
-  localWaSqlite = ../wa-sqlite;  # Adjust this path as needed
 in
 stdenv.mkDerivation rec {
   pname = "wa-sqlite-livestore";
@@ -9,7 +8,7 @@ stdenv.mkDerivation rec {
   # version = "3.46.1";
 
   srcs = [
-    localWaSqlite
+    waSQLiteSrc
     (fetchFromGitHub {
       owner = "sqlite";
       repo = "sqlite";
@@ -34,7 +33,7 @@ stdenv.mkDerivation rec {
     unpackFile ${builtins.elemAt srcs 1}
 
     # Copy wa-sqlite sources
-    cp -r ${localWaSqlite}/* .
+    cp -r ${waSQLiteSrc}/* .
 
     # Set the source root
     sourceRoot=${pname}
@@ -110,6 +109,9 @@ stdenv.mkDerivation rec {
     make dist/wa-sqlite.mjs dist/wa-sqlite.node.mjs WASQLITE_EXTRA_DEFINES="-DSQLITE_ENABLE_BYTECODE_VTAB -DSQLITE_ENABLE_SESSION -DSQLITE_ENABLE_PREUPDATE_HOOK -DSQLITE_ENABLE_FTS5"
     mkdir -p dist-fts5
     mv dist/wa-sqlite* dist-fts5
+
+    # Make dist files writable before cleaning
+    chmod -R u+w dist/ || true
 
     make clean
 
