@@ -28,20 +28,31 @@
    - Add entry for new version with date
    - Document changes
 
-5. **Commit all changes**
+5. **Commit wa-sqlite submodule changes**
    ```bash
-   # The wa-sqlite submodule has modified dist files that need to be committed
+   cd wa-sqlite
+   git add .
+   git commit -m "Release vX.Y.Z"
+   cd ..
+   ```
+
+6. **Commit parent repo changes**
+   ```bash
    git add wa-sqlite nix/wa-sqlite-livestore.nix CHANGELOG.md
    git commit -m "Release wa-sqlite vX.Y.Z"
    ```
 
-6. **Publish to npm**
+7. **Publish to npm**
    ```bash
    cd wa-sqlite
    pnpm publish --access public
+   cd ..
    ```
 
-7. **Push changes**
+8. **Push both repos**
    ```bash
+   cd wa-sqlite
+   git push origin HEAD:main
+   cd ..
    git push origin main
    ```
