@@ -84,10 +84,13 @@ stdenv.mkDerivation rec {
     sed -i 's/curl/#curl/g' Makefile
 
     # Add `dist/wa-sqlite.node.mjs` to end of `Makefile` of wa-sqlite
+    # Note: We use EMFLAGS_DIST to ensure memory growth is enabled (via EMFLAGS_COMMON)
+    # This allows the WASM heap to grow dynamically at runtime, preventing "Cannot enlarge memory arrays" errors
+    # when working with databases larger than the initial 16MB allocation
     cat >> Makefile <<EOF
   dist/wa-sqlite.node.mjs: \$(OBJ_FILES_DIST) \$(JSFILES) \$(EXPORTED_FUNCTIONS) \$(EXPORTED_RUNTIME_METHODS)
   ''\tmkdir -p dist
-  ''\t\$(EMCC) \$(EMFLAGS_NODE) \$(EMFLAGS_INTERFACES) \$(EMFLAGS_LIBRARIES) -s ENVIRONMENT=node \$(OBJ_FILES_DIST) -o \$@
+  ''\t\$(EMCC) \$(EMFLAGS_DIST) \$(EMFLAGS_INTERFACES) \$(EMFLAGS_LIBRARIES) -s ENVIRONMENT=node \$(OBJ_FILES_DIST) -o \$@
   EOF
 
     cat Makefile
