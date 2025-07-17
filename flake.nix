@@ -27,6 +27,11 @@
             waSQLiteSrc = "${self}/wa-sqlite";
           };
           
+          # Build WASM version of sqldiff with JS bindings
+          sqldiff-wasm = pkgs.callPackage ./nix/sqldiff-wasm.nix { 
+            inherit pkgsUnstable; 
+          };
+          
           # wa-sqlite-livestore-esm = pkgs.callPackage ./packages/sqlite/nix/default.nix {
           #   wa-sqlite-livestore = self.packages.${system}.wa-sqlite-livestore;
           # };
@@ -59,6 +64,25 @@
               echo "✓ wa-sqlite build complete"
             '');
           };
+
+          build-sqldiff = {
+            type = "app";
+            program = toString (pkgs.writeShellScript "build-sqldiff" ''
+              set -euo pipefail
+              
+              echo "Building sqldiff-wasm..."
+              
+              pkg=$(nix build --no-link --print-out-paths .#sqldiff-wasm)
+              
+              # Setup/update dist directory
+              mkdir -p sqldiff-wasm
+              rm -rf sqldiff-wasm/dist
+              echo "Copying built package from $pkg..."
+              cp -rf "$pkg/dist" sqldiff-wasm/dist
+              chmod -R u+w sqldiff-wasm/dist
+              echo "✓ sqldiff-wasm build complete"
+            '');
+          };
         };
 
         # Clean devShell without problematic interpolations
@@ -77,6 +101,7 @@
             echo ""
             echo "Available commands:"
             echo "  nix run .#build-wa-sqlite    - Build wa-sqlite"
+            echo "  nix run .#build-sqldiff      - Build sqldiff-wasm"
           '';
 
         };

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debug</title>
+  </head>
+  <body>
+    <h1>Debug Page</h1>
+    <div id="output"></div>
+    
+    <script type="module">
+      const output = document.getElementById('output');
+      
+      try {
+        output.innerHTML += '<p>Starting imports...</p>';
+        
+        // Test wa-sqlite import
+        const SQLiteESMFactory = await import('wa-sqlite/dist/wa-sqlite.mjs');
+        output.innerHTML += '<p>✅ wa-sqlite imported successfully</p>';
+        
+        // Test sqldiff-wasm import
+        const { SqlDiffWasm } = await import('@schickling/sqldiff-wasm');
+        output.innerHTML += '<p>✅ sqldiff-wasm imported successfully</p>';
+        
+        // Test initialization
+        const sqlDiff = new SqlDiffWasm();
+        await sqlDiff.init();
+        output.innerHTML += '<p>✅ sqldiff-wasm initialized successfully</p>';
+        
+      } catch (error) {
+        output.innerHTML += `<p>❌ Error: ${error.message}</p>`;
+        console.error('Debug error:', error);
+      }
+    </script>
+  </body>
+</html> 
