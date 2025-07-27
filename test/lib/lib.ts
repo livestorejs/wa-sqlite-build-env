@@ -24,11 +24,11 @@ export type SynchronousDatabase = {
 
 export class SqliteError extends Error {
   constructor({ query, code, cause }: { query: { sql: string; bindValues: PreparedBindValues }, code: number, cause: any }) {
-    super(`SQL error: ${query.sql}`)
+    super(`SQL error: ${query.sql} (code: ${code}, cause: ${String(cause)})`)
   }
 }
 
-import { exportDb } from './sqlite-utils.ts'
+import { exportDb } from './sqlite-utils.js'
 
 export const makeSynchronousDatabase = (sqlite3: SQLiteAPI, db: number): SynchronousDatabase => {
   const preparedStmts: PreparedStatement[] = []

@@ -1,5 +1,5 @@
 import * as WaSqlite from '@livestore/wa-sqlite'
-import WaSqliteFactory from '@livestore/wa-sqlite/dist/wa-sqlite.mjs'
+import WaSqliteFactory from '@livestore/wa-sqlite/dist/wa-sqlite.node.mjs'
 import { MemoryVFS } from '@livestore/wa-sqlite/src/examples/MemoryVFS.js'
 
 export * as SqliteConstants from '@livestore/wa-sqlite/src/sqlite-constants.js'

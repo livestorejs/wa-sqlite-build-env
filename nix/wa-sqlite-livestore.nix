@@ -4,19 +4,15 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "wa-sqlite-livestore";
-  version = "3.47.0";
-  # version = "3.46.1";
+  version = "3.50.1";
 
   srcs = [
     waSQLiteSrc
     (fetchFromGitHub {
       owner = "sqlite";
       repo = "sqlite";
-      rev = "f5fb820c0f4781337faf02ed871be68d13a83d94";
-      sha256 = "sha256-35xrRPgoj92rji9EAyCHvhMP/NEz9hffOMJyhSKCCZ8=";
-      # version = "3.46.1";
-      # rev = "f3d536d37825302e31ed0eddd811c689f38f85a3";
-      # sha256 = "sha256-dJd03TOsNkOeW3f8vC5hXiIx+/w74vXcnq6HkRL7A24=";
+      rev = "979a07af38c8fb1d344253f59736cbfa91bd0a66";
+      sha256 = "sha256-pFp1JMHYcb1YN/mG6+Ru2QETRtqzh/EheKVkjvCpnLo=";
       name = "sqlite-src";
     })
   ];

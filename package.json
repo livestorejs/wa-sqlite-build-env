@@ -1,7 +1,16 @@
 {
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@9.3.0",
-  "devDependencies": {},
-  "scripts": {}
+  "type": "module",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "vitest": "^3.2.4",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "type-check": "tsc --noEmit"
+  }
 }

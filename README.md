@@ -1,22 +1,38 @@
 # wa-sqlite-build-env
 
-Build environment for [livestorejs/wa-sqlite](https://github.com/livestorejs/wa-sqlite). 
+Build environment for [livestorejs/wa-sqlite](https://github.com/livestorejs/wa-sqlite).
+
+## Install
+
+```bash
+pnpm install
+```
+
+## Test
+
+```bash
+pnpm test:run
+```
 
 ## Build
 
-```sh
-cp -r wa-sqlite wa-sqlite-local
-rm -rf wa-sqlite-local/.git
-git add wa-sqlite-local
-# update `localWaSqlite` in `nix/wa-sqlite-livestore.nix`
-nix develop  --print-build-logs     
+Build wa-sqlite using Nix:
 
-# TODO bring this back once Nix-submodule issue is fixed
-rm -rf wa-sqlite/dist
-nix develop '.?submodules=1' --print-build-logs     
+```bash
+nix run .#build-wa-sqlite
 ```
 
-NOTE: `.?submodules=1` is required since `wa-sqlite` is a submodule.
+This will:
+- Initialize the wa-sqlite submodule if needed
+- Build wa-sqlite with emscripten using the configured SQLite version
+- Generate both standard and FTS5-enabled builds
+- Copy the built artifacts to `wa-sqlite/dist/`
+
+The build generates:
+- `wa-sqlite/dist/wa-sqlite.mjs` - Browser build
+- `wa-sqlite/dist/wa-sqlite.node.mjs` - Node.js build  
+- `wa-sqlite/dist/wa-sqlite.wasm` - WebAssembly binary
+- `wa-sqlite/dist/fts5/` - FTS5 full-text search variants
 
 ## Publish
 

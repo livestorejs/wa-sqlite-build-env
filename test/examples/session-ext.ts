@@ -1,4 +1,4 @@
-import { makeSynchronousDatabase } from "./lib/lib"
+import { makeSynchronousDatabase } from "../lib/lib"
 import WaSqliteFactory from '@livestore/wa-sqlite/dist/wa-sqlite.node.mjs'
 import * as WaSqlite from '@livestore/wa-sqlite'
 import { MemoryVFS } from '@livestore/wa-sqlite/src/examples/MemoryVFS.js'
@@ -58,7 +58,7 @@ const main = async () => {
 
 		// const restoredChangesetIter = sqlite3.changeset_start(changeset.changeset)
 		// sqlite3.changeset_finalize(restoredChangesetIter)
-		const invertedChangeset = { changeset: sqlite3.changeset_invert(new Uint8Array(changeset.changeset.slice())) }
+		const invertedChangeset = { changeset: sqlite3.changeset_invert(new Uint8Array(changeset.changeset?.slice() ?? [])) }
 
 		sqlite3.changeset_apply(db, invertedChangeset.changeset)
 	}
