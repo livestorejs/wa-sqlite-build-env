@@ -1,5 +1,7 @@
 import * as SqliteConstants from '@livestore/wa-sqlite/src/sqlite-constants.js'
 
+import { exportDb } from './sqlite-utils.ts'
+
 export type PreparedBindValues = Record<string, any>
 
 export interface PreparedStatement {
@@ -28,7 +30,6 @@ export class SqliteError extends Error {
   }
 }
 
-import { exportDb } from './sqlite-utils.js'
 
 export const makeSynchronousDatabase = (sqlite3: SQLiteAPI, db: number): SynchronousDatabase => {
   const preparedStmts: PreparedStatement[] = []
