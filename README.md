@@ -36,6 +36,8 @@ The build generates:
 
 ## Publish
 
+See `RELEASE.md` for more details.
+
 ```sh
 cd wa-sqlite
 pnpm publish
