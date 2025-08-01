@@ -4,7 +4,8 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
-    testTimeout: 10000,
+    testTimeout: 30000, // Increased timeout for large database operations
     include: ['test/unit/**/*.test.ts'],
+    setupFiles: ['test/setup/database-setup.ts'],
   },
 })

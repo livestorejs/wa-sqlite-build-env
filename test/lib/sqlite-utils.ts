@@ -90,6 +90,14 @@ export const select = (sqlite3: WaSqlite.SQLiteAPI, dbPointer: number, query: st
   return results
 }
 
+export const exec = (sqlite3: WaSqlite.SQLiteAPI, dbPointer: number, query: string, bindValues?: PreparedBindValues) => {
+  const stmt = prepare(sqlite3, dbPointer, query)
+  stmt.execute(bindValues ?? {}, { onRowsChanged: (changes: number) => {
+    return changes
+  } })
+  stmt.finalize()
+}
+
 export const prepare = (sqlite3: WaSqlite.SQLiteAPI, dbPointer: number, queryStr: string) => {
   const stmts = sqlite3.statements(dbPointer, queryStr.trim(), { unscoped: true })
 

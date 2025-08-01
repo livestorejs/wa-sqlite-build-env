@@ -9,3 +9,5 @@ tsconfig.tsbuildinfo
 /wa-sqlite-livestore
 
 tmp
+
+*.db
