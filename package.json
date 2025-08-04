@@ -7,7 +7,7 @@
     "vitest": "^3.2.4",
     "@types/node": "^22.10.5",
     "@livestore/wa-sqlite": "file:wa-sqlite",
-    "typescript": "^5.6.2"
+    "typescript": "^5.9.2"
   },
   "scripts": {
     "test": "vitest",

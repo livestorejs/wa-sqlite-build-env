@@ -22,7 +22,7 @@ export const loadSqlite3Wasm = async () => {
 export const importBytesToDb = (
   sqlite3: WaSqlite.SQLiteAPI,
   db: number,
-  bytes: Uint8Array,
+  bytes: Uint8Array<ArrayBuffer>,
   readOnly: boolean = false,
 ) => {
   // https://www.sqlite.org/c3ref/c_deserialize_freeonclose.html
@@ -59,7 +59,7 @@ export const makeInMemoryDb = (sqlite3: WaSqlite.SQLiteAPI) => {
 }
 
 // Enhanced import/export functions (consolidated from import-export-impl.ts)
-export const importDb = (sqlite3: WaSqlite.SQLiteAPI, dbPointer: number, source: Uint8Array) => {
+export const importDb = (sqlite3: WaSqlite.SQLiteAPI, dbPointer: number, source: Uint8Array<ArrayBuffer>) => {
   // https://www.sqlite.org/c3ref/c_deserialize_freeonclose.html
   // #define SQLITE_DESERIALIZE_FREEONCLOSE 1 /* Call sqlite3_free() on close */
   // #define SQLITE_DESERIALIZE_RESIZEABLE  2 /* Resize using sqlite3_realloc64() */

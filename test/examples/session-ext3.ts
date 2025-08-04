@@ -1,4 +1,4 @@
-import { makeSynchronousDatabase } from "../lib/lib"
+import { makeSynchronousDatabase } from "../lib/lib.ts"
 import WaSqliteFactory from '@livestore/wa-sqlite/dist/wa-sqlite.node.mjs'
 import * as WaSqlite from '@livestore/wa-sqlite'
 import { MemoryVFS } from '@livestore/wa-sqlite/src/examples/MemoryVFS.js'

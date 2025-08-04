@@ -1,4 +1,4 @@
-import { makeSynchronousDatabase } from "../lib/lib"
+import { makeSynchronousDatabase } from "../lib/lib.ts"
 import WaSqliteFactory from '@livestore/wa-sqlite/dist/wa-sqlite.node.mjs'
 import * as WaSqlite from '@livestore/wa-sqlite'
 import { MemoryVFS } from '@livestore/wa-sqlite/src/examples/MemoryVFS.js'
@@ -79,7 +79,7 @@ const main = async () => {
 		}
 	]
 
-	const changesets: Uint8Array[] = []
+	const changesets: Uint8Array<ArrayBuffer>[] = []
 
 	for (const stmt of stmts) {
 		const session = sqlite3.session_create(db, 'main')

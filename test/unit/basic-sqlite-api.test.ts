@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { loadSqlite3Wasm, makeInMemoryDb } from '../lib/sqlite-utils'
-import { makeSynchronousDatabase } from '../lib/lib'
+import { loadSqlite3Wasm, makeInMemoryDb } from '../lib/sqlite-utils.ts'
+import { makeSynchronousDatabase } from '../lib/lib.ts'
 import type { SQLiteAPI } from '@livestore/wa-sqlite'
 
 describe('Basic SQLite Synchronous API', () => {

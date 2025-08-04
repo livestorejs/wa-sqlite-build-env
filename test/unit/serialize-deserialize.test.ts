@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { readFileSync, existsSync } from 'fs'
 import * as path from 'path'
-import { loadSqlite3Wasm, importDb, exportDb, select } from '../lib/sqlite-utils'
+import { loadSqlite3Wasm, importDb, exportDb, select } from '../lib/sqlite-utils.ts'
 import type { SQLiteAPI } from '@livestore/wa-sqlite'
 
 describe('serialize/deserialize', () => {
